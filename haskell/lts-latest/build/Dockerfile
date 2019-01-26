@@ -1,12 +1,10 @@
-FROM ubuntu:xenial-20180808
-ENV container docker
+FROM stack:base
 WORKDIR /root
 
 # install packages
 RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get -y install \
-            curl \
             emacs24-nox \
             git \
             nkf \
@@ -19,10 +17,7 @@ RUN git clone https://github.com/chupaaaaaaan/dotfiles.git && \
     ./dotfiles/deploy.sh
 
 # Haskell stack settings
-RUN curl -sSL https://get.haskellstack.org/ | sh && \
-    echo "alias stack='stack --resolver=lts-8.24'" >> /root/.bashrc && \
-    . /root/.bashrc && \
-    stack setup && stack install ghc-mod
+RUN stack setup && stack install ghc-mod
 
 RUN emacs --daemon
 
