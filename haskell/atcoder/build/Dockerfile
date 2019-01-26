@@ -22,7 +22,7 @@ RUN git clone https://github.com/chupaaaaaaan/dotfiles.git && \
 RUN curl -sSL https://get.haskellstack.org/ | sh && \
     echo "alias stack='stack --resolver=lts-6.35'" >> /root/.bashrc && \
     . /root/.bashrc && \
-    stack setup && stack install ghc-mod \
+    stack setup && stack install ghc-mod
 
 RUN emacs --daemon
 
