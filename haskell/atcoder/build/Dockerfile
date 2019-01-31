@@ -14,7 +14,7 @@ RUN git clone https://github.com/chupaaaaaaan/dotfiles.git && \
     chmod +x ./dotfiles/deploy.sh && ./dotfiles/deploy.sh
 
 # Haskell stack settings
-RUN echo "alias stack='stack --resolver=lts-6.35'" >> /root/.bashrc && \
+RUN echo -e "extra-deps:\n  ghc-mod-5.8.0.0" >> .stack/global-project/stack.yaml && \
     stack install ghc-mod
 
 RUN emacs --daemon
