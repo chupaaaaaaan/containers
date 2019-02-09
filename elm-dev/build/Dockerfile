@@ -6,11 +6,16 @@ RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get -y install \
       curl \
-      emacs24-nox \
       git \
       nkf \
+      software-properties-common \
       unzip \
       zip
+
+# install emacs
+RUN add-apt-repository -y ppa:kelleyk/emacs && \
+    apt update && \
+    apt install -y emacs26
 
 # put dotfiles
 RUN git clone https://github.com/chupaaaaaaan/dotfiles.git && \
@@ -28,6 +33,7 @@ RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
     npm config set -g user root && \
     npm install -g elm@0.19.0-bugfix2 && \
     npm install -g elm-format && \
+    npm install -g elm-oracle && \
     npm install -g elm-test
 
 ENTRYPOINT ["tail","-f","/dev/null"]

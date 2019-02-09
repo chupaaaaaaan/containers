@@ -5,6 +5,7 @@ WORKDIR /root
 RUN apt -y install \
   git \
   nkf \
+  software-properties-common \
   unzip \
   zip
 
