@@ -1,0 +1,30 @@
+version: "2"
+services:
+  db:
+    image: postgres
+
+    networks:
+      - test_network
+
+    environment:
+      POSTGRES_PASSWORD: password
+      
+    volumes:
+      - ${HOME}/data/postgresql:/var/lib/postgresql/data      
+
+
+  haskell:
+    container_name: haskell
+
+    build:
+      context: ./build
+      dockerfile: Dockerfile
+
+    networks:
+      - test_network
+
+    entrypoint: tail -f /dev/null
+
+
+networks:
+  test_network:
