@@ -1,6 +1,8 @@
 version: "2"
 services:
   atcoder:
-    build: ./build
+    build:
+      context: ./build
+      dockerfile: Dockerfile
     volumes:
       - ./data:/data
