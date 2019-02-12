@@ -20,6 +20,9 @@ services:
       context: ./build
       dockerfile: Dockerfile
 
+    volumes:
+      - ./data:/data
+
     networks:
       - test_network
 
