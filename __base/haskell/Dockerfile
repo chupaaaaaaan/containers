@@ -7,12 +7,13 @@ WORKDIR /root
 RUN apt update && \
     apt -y install curl
 
-# Haskell stack settings
-ENV PATH "$HOME/.local/bin:${PATH}"
-RUN curl -sSL https://get.haskellstack.org/ | sh
-
-# Haskell stack settings
-RUN stack --resolver="${RESOLVER}" setup && \
-    echo "alias stack='stack --resolver=${RESOLVER}'" >> /root/.bashrc
+# Haskell stack install & config
+ENV PATH "/root/.local/bin:${PATH}"
+RUN curl -sSL https://get.haskellstack.org/ | sh && \
+    stack config set system-ghc --global true && \
+    stack config set install-ghc --global false && \
+    stack --resolver="${RESOLVER}" setup && \
+    mkdir /root/.bashrc.d && \
+    echo "alias stack='stack --resolver=${RESOLVER}'" >> /root/.bashrc.d/stack
 
 ENV GHC_VERSION "${GHC_VERSION}"
