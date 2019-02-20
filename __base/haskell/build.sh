@@ -9,6 +9,8 @@ do
     TAG="stack:${RESOLVER}"
 
     if [ $(docker images | grep "${TAG}" | wc -l) -eq 0 ]; then
-        docker build --build-arg "RESOLVER=${RESOLVER}" "GHC_VERSION=${GHC_VERSION}" -t "${TAG}" .
+        docker build . -t "${TAG}" \
+               --build-arg "RESOLVER=${RESOLVER}" \
+               --build-arg "GHC_VERSION=${GHC_VERSION}"
     fi
 done < <(cat resolver-list.txt | grep -v -e "^[[:space:]]*#" -e "^[[:space:]]*$")
