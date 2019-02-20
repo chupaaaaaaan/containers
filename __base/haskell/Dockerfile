@@ -12,6 +12,6 @@ ENV PATH "/root/.local/bin:${PATH}"
 RUN curl -sSL https://get.haskellstack.org/ | sh && \
     stack config set system-ghc --global true && \
     stack config set install-ghc --global false && \
-    stack --resolver="${RESOLVER}" setup && \
+    stack --resolver="${RESOLVER}" setup
 
 ENV GHC_VERSION "${GHC_VERSION}"
