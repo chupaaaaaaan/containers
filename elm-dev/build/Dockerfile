@@ -1,6 +1,12 @@
 FROM ubuntu:xenial-20180808
 WORKDIR /root
 
+
+RUN cat /etc/resolv.conf
+RUN env
+
+
+
 # install packages
 RUN apt-get update && \
     apt-get -y upgrade && \
