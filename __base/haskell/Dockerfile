@@ -13,7 +13,5 @@ RUN curl -sSL https://get.haskellstack.org/ | sh && \
     stack config set system-ghc --global true && \
     stack config set install-ghc --global false && \
     stack --resolver="${RESOLVER}" setup && \
-    mkdir /root/.bashrc.d && \
-    echo "alias stack='stack --resolver=${RESOLVER}'" >> /root/.bashrc.d/stack
 
 ENV GHC_VERSION "${GHC_VERSION}"
