@@ -8,6 +8,7 @@ RUN apt update && \
     apt -y install curl
 
 # Haskell stack settings
+ENV PATH "$HOME/.local/bin:${PATH}"
 RUN curl -sSL https://get.haskellstack.org/ | sh
 
 # Haskell stack settings
