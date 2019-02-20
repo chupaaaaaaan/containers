@@ -1,6 +1,6 @@
 FROM ubuntu:xenial-20180808
-ARG RESOLVER="lts-6.35"
-ARG GHC_VERSION="7.10.3"
+ARG RESOLVER
+ARG GHC_VERSION
 WORKDIR /root
 
 # install packages
