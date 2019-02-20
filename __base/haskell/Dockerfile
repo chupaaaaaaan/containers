@@ -1,11 +1,14 @@
 FROM ubuntu:xenial-20180808
-ENV container docker
+ARG RESOLVER="lts-6.35"
 WORKDIR /root
 
 # install packages
-RUN apt-get update && \
-    apt-get -y upgrade && \
-    apt-get -y install curl
+RUN apt update && \
+    apt -y install curl
 
 # Haskell stack settings
 RUN curl -sSL https://get.haskellstack.org/ | sh
+
+# Haskell stack settings
+RUN stack --resolver="${RESOLVER}" setup && \
+    echo "alias stack='stack --resolver=${RESOLVER}'" >> /root/.bashrc
