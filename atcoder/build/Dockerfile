@@ -1,27 +1,24 @@
-FROM stack:lts-6.35
+ARG RESOLVER
+FROM stack:${RESOLVER}
+ARG RESOLVER
 WORKDIR /root
 
-# install packages
-RUN apt-get -y install \
-  git \
-  nkf \
-  software-properties-common \
-  unzip \
-  zip
-
-# install emacs
-RUN add-apt-repository -y ppa:kelleyk/emacs && \
+RUN : install emacs / some packages && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv EAAFC9CD && \
+    echo 'deb http://ppa.launchpad.net/kelleyk/emacs/ubuntu xenial main' > /etc/apt/sources.list.d/ubuntu-emacs26-xenial.list && \
     apt update && \
-    apt install -y emacs26
+    apt install -y emacs26 git nkf unzip zip && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    : ===========================end===========================
 
-# put dotfiles
-RUN git clone https://github.com/chupaaaaaaan/dotfiles.git && \
-    chmod +x ./dotfiles/deploy.sh && ./dotfiles/deploy.sh
+RUN : put dotfiles && \
+    git clone https://github.com/chupaaaaaaan/dotfiles.git && \
+    chmod +x ./dotfiles/deploy.sh && ./dotfiles/deploy.sh && \
+    mkdir /root/.bashrc.d && \
+    echo "alias stack='stack --resolver=${RESOLVER}'" >> /root/.bashrc.d/stack && \
+    : ===========================end===========================
 
-# Haskell stack settings
-# RUN echo "extra-deps:"       >> .stack/global-project/stack.yaml && \
-#     echo "- ghc-mod-5.8.0.0" >> .stack/global-project/stack.yaml && \
-#     stack install ghc-mod
 RUN stack install ghc-mod
 
 RUN emacs --daemon
