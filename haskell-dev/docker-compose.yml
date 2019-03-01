@@ -16,6 +16,8 @@ services:
   haskell:
     container_name: haskell
 
+    hostname: haskell-dev
+
     build:
       context: ./build
       dockerfile: Dockerfile
