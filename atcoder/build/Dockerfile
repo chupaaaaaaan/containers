@@ -19,7 +19,11 @@ RUN : put dotfiles && \
     echo "alias stack='stack --resolver=${RESOLVER}'" >> /root/.bashrc.d/stack && \
     : ===========================end===========================
 
-RUN stack install ghc-mod
+RUN : install ghc-mod / create symlink of ghc && \
+    stack install ghc-mod && \
+    ln -s $(stack path --compiler-exe) /root/.local/bin/ghc && \
+    : ===========================end===========================
+      
 
 RUN emacs --daemon
 
