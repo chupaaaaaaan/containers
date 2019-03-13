@@ -1,6 +1,5 @@
 FROM ubuntu:xenial-20180808
 ARG RESOLVER
-ARG GHC_VERSION
 WORKDIR /root
 
 ENV PATH "/root/.local/bin:${PATH}"
