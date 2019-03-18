@@ -17,6 +17,7 @@ RUN : put dotfiles && \
     chmod +x ./dotfiles/deploy.sh && ./dotfiles/deploy.sh && \
     mkdir /root/.bashrc.d && \
     echo "alias stack='stack --resolver=${RESOLVER}'" >> /root/.bashrc.d/stack && \
+    echo 'eval "$(stack --bash-completion-script stack)"' >> /root/.bashrc.d/stack && \
     : ===========================end===========================
 
 RUN : install Haskell IDE Engine && \
@@ -27,6 +28,6 @@ RUN : install Haskell IDE Engine && \
     rm -rf haskell-ide-engine && \
     : ===========================end===========================
 
-RUN emacs --daemon
+RUN emacs --daemon && emacsclient -e "(kill-emacs)"
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]

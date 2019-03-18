@@ -17,14 +17,13 @@ RUN : put dotfiles && \
     chmod +x ./dotfiles/deploy.sh && ./dotfiles/deploy.sh && \
     mkdir /root/.bashrc.d && \
     echo "alias stack='stack --resolver=${RESOLVER}'" >> /root/.bashrc.d/stack && \
+    echo 'eval "$(stack --bash-completion-script stack)"' >> /root/.bashrc.d/stack && \
     : ===========================end===========================
 
-RUN : install ghc-mod / create symlink of ghc && \
+RUN : install ghc-mod && \
     stack install ghc-mod && \
-    ln -s $(stack path --compiler-exe) /root/.local/bin/ghc && \
     : ===========================end===========================
-      
 
-RUN emacs --daemon
+RUN stack exec -- emacs --daemon
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
