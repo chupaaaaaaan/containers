@@ -1,13 +1,14 @@
 FROM ubuntu:xenial-20180808
 WORKDIR /root
 
-RUN : install emacs & some packages && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv EAAFC9CD && \
+RUN : install emacs & some packages / set timezone && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EAAFC9CD && \
     echo 'deb http://ppa.launchpad.net/kelleyk/emacs/ubuntu xenial main' > /etc/apt/sources.list.d/ubuntu-emacs26-xenial.list && \
     apt update && \
-    apt -y install emacs26 curl git nkf unzip zip && \
+    apt -y install emacs26 curl git nkf tzdata unzip zip && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* && \
+    ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     : ===========================end===========================
 
 RUN : put dotfiles && \

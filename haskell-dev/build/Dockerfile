@@ -3,13 +3,14 @@ FROM stack:${RESOLVER}
 ARG RESOLVER
 WORKDIR /root
 
-RUN : install emacs / some packages && \
+RUN : install emacs / some packages / set timezone && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EAAFC9CD && \
     echo 'deb http://ppa.launchpad.net/kelleyk/emacs/ubuntu xenial main' > /etc/apt/sources.list.d/ubuntu-emacs26-xenial.list && \
     apt update && \
-    apt install -y emacs26 git nkf unzip zip libicu-dev libtinfo-dev libgmp-dev && \
+    apt install -y emacs26 git nkf tzdata unzip zip libicu-dev libtinfo-dev libgmp-dev && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* && \
+    ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     : ===========================end===========================
 
 RUN : put dotfiles && \
