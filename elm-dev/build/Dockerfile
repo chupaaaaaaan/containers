@@ -1,7 +1,7 @@
 FROM ubuntu:xenial-20180808
 WORKDIR /root
 
-RUN : install emacs & some packages / set timezone && \
+RUN : install emacs / some packages / set timezone && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EAAFC9CD && \
     echo 'deb http://ppa.launchpad.net/kelleyk/emacs/ubuntu xenial main' > /etc/apt/sources.list.d/ubuntu-emacs26-xenial.list && \
     apt update && \
@@ -19,6 +19,7 @@ RUN : put dotfiles && \
 ENV NVM_DIR "/root/.nvm"
 
 RUN : install node / install elm && \
+    mkdir -p "$NVM_DIR" && \
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash && \
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && \

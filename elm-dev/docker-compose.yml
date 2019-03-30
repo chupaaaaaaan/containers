@@ -16,6 +16,8 @@ services:
   elm-dev:
     container_name: elm-dev
 
+    hostname: elm-dev
+
     build:
       context: ./build
       dockerfile: Dockerfile
