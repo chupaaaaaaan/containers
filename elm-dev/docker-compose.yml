@@ -1,22 +1,22 @@
 version: "2.2"
 services:
-  db:
-    image: postgres
+  # db:
+  #   image: postgres
 
-    networks:
-      - test_network
+  #   networks:
+  #     - test_network
 
-    environment:
-      POSTGRES_PASSWORD: password
+  #   environment:
+  #     POSTGRES_PASSWORD: password
       
-    volumes:
-      - ${HOME}/data/postgresql:/var/lib/postgresql/data      
+  #   volumes:
+  #     - ${HOME}/data/postgresql:/var/lib/postgresql/data
 
 
-  elm-dev:
-    container_name: elm-dev
+  elm:
+    container_name: elm
 
-    hostname: elm-dev
+    hostname: elm
 
     build:
       context: ./build
