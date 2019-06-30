@@ -29,7 +29,7 @@ services:
       - "5601:5601"
 
     # volumes:
-    #   - ./data/kibana/settings:/usr/share/kibana/config
+    #   - ./contents/kibana/settings:/usr/share/kibana/config
 
     networks:
       - esnet
@@ -41,8 +41,8 @@ services:
     container_name: logstash
 
     # volumes:
-    #   - ./data/logstash/pipeline:/usr/share/logstash/pipeline
-    #   - ./data/logstash/settings:/usr/share/logstash/config
+    #   - ./contents/logstash/pipeline:/usr/share/logstash/pipeline
+    #   - ./contents/logstash/settings:/usr/share/logstash/config
 
     networks:
       - esnet
