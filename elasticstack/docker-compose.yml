@@ -70,9 +70,9 @@ services:
 
     container_name: logstash
 
-    # volumes:
-    #   - ./contents/logstash/pipeline:/usr/share/logstash/pipeline
-    #   - ./contents/logstash/settings:/usr/share/logstash/config
+    volumes:
+      - ./contents/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./contents/logstash/settings:/usr/share/logstash/config
 
     networks:
       - esnet
